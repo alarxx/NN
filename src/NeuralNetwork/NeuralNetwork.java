@@ -66,7 +66,7 @@ public class NeuralNetwork {
             double[] errorsNext = new double[l.size];
             double[] gradients = new double[l1.size];
             for (int i = 0; i < l1.size; i++) {
-                gradients[i] = errors[i] * derivative(layers[k + 1].neurons[i]);
+                gradients[i] = errors[i] * derivative(l1.neurons[i]);
                 gradients[i] *= learningRate;
             }
             double[][] deltas = new double[l1.size][l.size];
@@ -83,6 +83,7 @@ public class NeuralNetwork {
             }
             errors = new double[l.size];
             System.arraycopy(errorsNext, 0, errors, 0, l.size);
+
             double[][] weightsNew = new double[l.weights.length][l.weights[0].length];
             for (int i = 0; i < l1.size; i++) {
                 for (int j = 0; j < l.size; j++) {

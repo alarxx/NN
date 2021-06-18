@@ -9,14 +9,14 @@ public class Layer {
     public Layer(int size, int nextSize){
         this.size = size;
         neurons = new float[size];
-        W = new float[size][nextSize];
+        W = new float[nextSize][size];
         B = new float[nextSize];
     }
 
     public void randomly_fill_w(){
-        int row = W.length, col = W[0].length;
+        int row = W.length, col = size;
         for(int i=0; i<row; i++){
-            for(int j=0; i<col; j++){
+            for(int j=0; j<col; j++){
                 W[i][j] = rand_min1to1();
             }
         }
