@@ -19,8 +19,15 @@ public class NeuralNet {
         }
     }
 
+    //Попытка добавить дропаут
     public float[] feedforward(float[] inputs){ //По-моему все идеально(не проверялось 170621)
+        //float probability = 0.3f;
+        //lr*=1/p;
         layers[0].neurons = Arrays.copyOf(inputs, inputs.length);
+        //Вместо верхней строчки ставить цикл
+        // for(int i=0; i<layers[0].size; i++){
+        //      if(Math.random()<p){layers[0].neurons[i]=0;}else{layers[0].neurons[i]=inputs[i];}
+        // }
         int n = layers.length;
         for(int i=1; i<n; i++) {
             Layer l = layers[i - 1];
@@ -32,6 +39,9 @@ public class NeuralNet {
                     l1.neurons[j] += l.W[j][k] * l.neurons[k];
                 l1.neurons[j] += l.B[j];
                 l1.neurons[j] = sigmoid(l1.neurons[j]);
+                //Возможно здесь надо поставить дропаут
+
+                //if(Math.random()<p){l1.neurons[j]=0;}
             }
         }
         return layers[n - 1].neurons;
