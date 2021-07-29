@@ -20,28 +20,45 @@ public class NeuralNet {
     }
 
     //Попытка добавить дропаут
-    public float[] feedforward(float[] inputs){ //По-моему все идеально(не проверялось 170621)
-        //float probability = 0.3f;
-        //lr*=1/p;
-        layers[0].neurons = Arrays.copyOf(inputs, inputs.length);
-        //Вместо верхней строчки ставить цикл
-        // for(int i=0; i<layers[0].size; i++){
-        //      if(Math.random()<p){layers[0].neurons[i]=0;}else{layers[0].neurons[i]=inputs[i];}
-        // }
+    public float[] feedforward(float[] inputs, float drop){ //drop=(0;1)
+        //здесь я фшил прямо dropout, можно ли сделать добавив одну строчку всего?
+        float p = 1f/drop;                    //dropout
+        for(int i=0; i<layers[0].size; i++) { //dropout, вместо простого
+            if (Math.random() < drop)
+                layers[0].neurons[i] = 0;
+            else layers[0].neurons[i] = inputs[i];
+        }
+
         int n = layers.length;
         for(int i=1; i<n; i++) {
             Layer l = layers[i - 1];
             Layer l1 = layers[i];
-
             for (int j = 0; j < l.W.length; j++) { //row in W matrix
                 l1.neurons[j] = 0;
-                for (int k = 0; k < l.W[0].length; k++)
+                if(Math.random()<drop) //dropout
+                    continue;
+                for (int k = 0; k < l.W[0].length; k++) //sum(i*w)
+                    l1.neurons[j] += l.W[j][k] * l.neurons[k];
+                l1.neurons[j] += l.B[j]; //bias
+                l1.neurons[j] *= p; //dropout
+                l1.neurons[j] = sigmoid(l1.neurons[j]);
+            }
+        }
+        return layers[n - 1].neurons;
+    }
+
+    public float[] feedforward(float[] inputs){
+        layers[0].neurons = Arrays.copyOf(inputs, inputs.length);
+        int n = layers.length;
+        for(int i=1; i<n; i++) {
+            Layer l = layers[i - 1];
+            Layer l1 = layers[i];
+            for (int j = 0; j < l.W.length; j++) { //row in W matrix
+                l1.neurons[j] = 0;
+                for (int k = 0; k < l.W[0].length; k++) //sum(i*w)
                     l1.neurons[j] += l.W[j][k] * l.neurons[k];
                 l1.neurons[j] += l.B[j];
                 l1.neurons[j] = sigmoid(l1.neurons[j]);
-                //Возможно здесь надо поставить дропаут
-
-                //if(Math.random()<p){l1.neurons[j]=0;}
             }
         }
         return layers[n - 1].neurons;
@@ -63,7 +80,7 @@ public class NeuralNet {
 
         float[] errors = new float[layers.length];
 
-        for(int j=0; j < layers.length; j++){
+        for(int j=0; j < layers[layers.length-1].size; j++){
             errors[j] = target[j] - layers[layers.length-1].neurons[j]; //E' = -2(t-o) * o(1-o) -> w+=lr*E'*do
         }
 

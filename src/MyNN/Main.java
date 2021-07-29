@@ -6,12 +6,12 @@ public class Main {
     }
     public void run(){
         Main m = new Main();
-        NeuralNet nn = new NeuralNet(0.1f, 3, 2);
+        NeuralNet nn = new NeuralNet(0.1f, 3, 6, 6, 2);
 
-        for (int i=0; i<10000; i++) {
-            nn.feedforward(new float[]{1, 0, 1});
+        for (int i=0; i<1000000; i++) {
+            nn.feedforward(new float[]{1, 0, 1}, 0.5f);
             nn.backpropagation(new float[]{1, 0});
-            nn.feedforward(new float[]{0, 1, 0});
+            nn.feedforward(new float[]{0, 1, 0}, 0.5f);
             nn.backpropagation(new float[]{0, 1});
         }
 
@@ -25,7 +25,11 @@ public class Main {
 
     }
 
-    public void run1() { }
+    public void run1() {
+        float f = 10.00001f;
+        //Нужно сохранить это значение и потом его восстановить
+
+    }
 
     public static void printArray(float[] arr){
         for(int i=0; i<arr.length; i++){
