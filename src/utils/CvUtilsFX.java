@@ -13,8 +13,11 @@ import org.opencv.imgproc.Imgproc;
 
 import java.awt.image.BufferedImage;
 
-public class CvUtilsFX {
+/**
+ * VM options: --module-path "путь к JavFX SDK\lib" --add-modules javafx.controls,javafx.fxml
+ */
 
+public class CvUtilsFX {
 
     //Mat to JavaFX
     public static WritableImage MatToWritableImage(Mat m) {

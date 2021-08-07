@@ -42,8 +42,8 @@ public class Main extends Application{
     }
 
     private void onClickButton(ActionEvent e) {
-        Mat f1 = openImg("C:\\Users\\Pupocheck\\IdeaProjects\\NN\\assets\\frame100.jpg", "frame_1");
-        Mat f2 = openImg("C:\\Users\\Pupocheck\\IdeaProjects\\NN\\assets\\frame102.jpg", "frame_2");
+        Mat f1 = openImg("C:\\Users\\Pupochek\\IdeaProjects\\NN\\assets\\frame100.jpg", "frame_1");
+        Mat f2 = openImg("C:\\Users\\Pupochek\\IdeaProjects\\NN\\assets\\frame102.jpg", "frame_2");
 
     }
 
