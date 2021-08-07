@@ -50,7 +50,7 @@ public class Main extends Application{
 
     public void computeKeyPoints(){
         Mat img = Imgcodecs.imread("C:\\Users\\Pupocheck\\IdeaProjects\\NN\\assets\\m1.jpg");
-        Mat img2 = Imgcodecs.imread("C:\\Users\\Pupocheck\\IdeaProjects\\NN\\assets\\m2.jpg");
+        Mat img2 = Imgcodecs.imread("C:\\Users\\Pupochek\\IdeaProjects\\NN\\assets\\m2.jpg");
         Imgproc.resize(img, img, new Size(720, 480));
         Imgproc.resize(img2, img2, new Size(720, 480));
 
