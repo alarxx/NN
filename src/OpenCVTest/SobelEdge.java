@@ -1,4 +1,4 @@
-package OpenCV;
+package OpenCVTest;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -40,5 +40,4 @@ public class SobelEdge {
         dst.convertTo(dst, CvType.CV_8UC1);
         return dst;
     }
-
 }

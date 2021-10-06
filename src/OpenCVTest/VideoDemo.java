@@ -1,4 +1,4 @@
-package OpenCV;
+package OpenCVTest;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -27,7 +27,7 @@ public class VideoDemo {
         window.setContentPane(label);
         window.setVisible(true);
 
-        VideoCapture capture = new VideoCapture("C:\\Users\\Pupocheck\\IdeaProjects\\NN\\assets\\car.mp4");
+        VideoCapture capture = new VideoCapture("C:\\Users\\Pupochek\\IdeaProjects\\NN\\assets\\car.mp4");
 
         if (!capture.isOpened()) {
             System.out.println("Не удалось открыть видео");
@@ -43,8 +43,8 @@ public class VideoDemo {
         int ff = 0;
         while (capture.read(frame)) {
             ff++;
-            if(ff==100 || ff==102)
-                Imgcodecs.imwrite("C:\\Users\\Pupocheck\\IdeaProjects\\NN\\assets\\frame"+ff+".jpg", frame);
+            if(ff==100 || ff==101)
+                Imgcodecs.imwrite("C:\\Users\\Pupochek\\IdeaProjects\\NN\\assets\\frame"+ff+".jpg", frame);
 
             Imgproc.resize(frame, frame, new Size(960, 540));
             // Здесь можно вставить код обработки кадра
@@ -57,7 +57,9 @@ public class VideoDemo {
             }
             try {
                 Thread.sleep(1);
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         System.out.println("Выход");
         capture.release();
