@@ -1,4 +1,4 @@
-package OpenCV;
+package OpenCVTest;
 
 import javafx.application.Application;
 import javafx.application.Platform;
